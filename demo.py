@@ -2,8 +2,8 @@ import pixiv
 import json
 import os
 
-USERNAME = 'highland2'
-PASSWORD = 'PiEqual314159265'
+USERNAME = ''
+PASSWORD = ''
 
 HOME = os.path.expandvars('$HOME')
 SAVE_DIR = os.path.join(HOME, 'tmp/pixiv')
