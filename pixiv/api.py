@@ -117,7 +117,7 @@ class PixivApiBase(object):
     def request(self, method, url, **kwargs):
         # request
         try:
-            result = self.scraper.request(method, url, cookies=self.cookies, headers=self.headers, **kwargs)
+            response = self.scraper.request(method, url, cookies=self.cookies, headers=self.headers, **kwargs)
         except scrapelib.HTTPError as e:
             body = json.loads(e.body, object_hook=attrdict.AttrDict)
             if 'errors' in body:
@@ -126,26 +126,27 @@ class PixivApiBase(object):
                 raise PixivError
 
         # update cookie
-        if 'Set-Cookie' in result.headers:
-            for m in re.finditer(r'(\S+)=(\S+);', result.headers['Set-Cookie']):
+        if 'Set-Cookie' in response.headers:
+            for m in re.finditer(r'(\S+)=(\S+);', response.headers['Set-Cookie']):
                 self.cookies.update({m.group(1): m.group(2)})
 
-        return result
+        return response
 
     def request_json(self, method, url, **kwargs):
-        result = self.request(method, url, **kwargs)
+        response = self.request(method, url, **kwargs)
+        response.encoding = 'utf8'
         try:
-            result_json = json.loads(result.text, object_hook=attrdict.AttrDict)
+            body = json.loads(response.text, object_hook=attrdict.AttrDict)
         except Exception:
             raise PixivError
 
-        return result_json
+        return body
 
     def request_singlepage(self, method, url, params=None, data=None):
-        res = self.request_json(method, url, params=params, data=data)
-        assert 'pagination' not in res
-        assert len(res.response) == 1
-        return res.response[0]
+        body = self.request_json(method, url, params=params, data=data)
+        assert 'pagination' not in body
+        assert len(body.response) == 1
+        return body.response[0]
 
     def request_multipages(self, method, url, params):
         if params['page']:
