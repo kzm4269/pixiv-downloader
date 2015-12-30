@@ -1,0 +1,91 @@
+{
+  "reuploaded_time": "2015-12-28 20:32:39",
+  "title": "おそ松くん-245男",
+  "type": "ugoira",
+  "metadata": {
+    "zip_urls": {
+      "ugoira600x600": "http://i3.pixiv.net/img-zip-ugoira/img/2015/12/28/20/32/39/54298454_ugoira600x600.zip"
+    },
+    "frames": [
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      },
+      {
+        "delay_msec": 130
+      }
+    ]
+  },
+  "tags": [
+    "おそ松くん",
+    "一松",
+    "十四松",
+    "カラ松",
+    "クソ松",
+    "せめて何かやって一松!"
+  ],
+  "publicity": 0,
+  "tools": [
+    "Photoshop"
+  ],
+  "content_type": null,
+  "user": {
+    "account": "dodo85117",
+    "id": 7064725,
+    "stats": null,
+    "is_following": false,
+    "is_follower": false,
+    "profile": null,
+    "is_friend": false,
+    "is_premium": null,
+    "profile_image_urls": {
+      "px_50x50": "http://i1.pixiv.net/img125/profile/dodo85117/9997452_s.jpg"
+    },
+    "name": "KANIN"
+  },
+  "is_manga": false,
+  "is_liked": false,
+  "favorite_id": 0,
+  "book_style": "none",
+  "width": 464,
+  "id": 54298454,
+  "stats": {
+    "commented_count": 0,
+    "views_count": 530,
+    "favorited_count": {
+      "public": 41,
+      "private": 2
+    },
+    "score": 347,
+    "scored_count": 35
+  },
+  "age_limit": "all-age",
+  "created_time": "2015-12-28 20:32:39",
+  "caption": null,
+  "image_urls": {
+    "small": "http://i3.pixiv.net/img-inf/img/2015/12/28/20/32/39/54298454_s.jpg",
+    "px_128x128": "http://i3.pixiv.net/c/128x128/img-master/img/2015/12/28/20/32/39/54298454_square1200.jpg",
+    "large": "http://i3.pixiv.net/img-original/img/2015/12/28/20/32/39/54298454_ugoira0.jpg",
+    "px_480mw": "http://i3.pixiv.net/c/480x960/img-master/img/2015/12/28/20/32/39/54298454_master1200.jpg",
+    "medium": ""
+  },
+  "height": 452,
+  "page_count": 1
+}

@@ -1,23 +1,18 @@
 import pixiv
+import json
+import os
 
-USERNAME = 'hoge'
-PASSWORD = 'huga'
-SAVE_DIR = '/path/to/save/dir'
+HOME = os.path.expandvars('$HOME')
+SAVE_DIR = os.path.join(HOME, 'tmp/pixiv')
+
 
 def main():
-    api = pixiv.login(username=USERNAME, password=PASSWORD)
+    with open('password.json') as f:
+        password = json.load(f)
+    api = pixiv.login(**password)
 
-    print('---- following users ----')
-    for user in api.me_following(publicity='public', per_page=5, page=1):
-        print(user.id, user.name)
-
-    print('---- following works ----')
-    for work in api.me_following_works(per_page=10, page=1):
-        print(work.id, work.title, work.user.name)
-
-    print('---- donwload ---')
-    downloader = pixiv.Downloader(api, SAVE_DIR)
-    downloader.download_work(work_id=54238974)
+    downloader = pixiv.Downloader(api)
+    downloader.download_work(54298454)
 
 
 if __name__ == '__main__':
