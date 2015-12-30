@@ -1,6 +1,6 @@
-import pixiv
-import json
 import os
+
+import pixiv
 
 USERNAME = ''
 PASSWORD = ''
