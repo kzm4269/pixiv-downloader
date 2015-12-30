@@ -182,7 +182,7 @@ class Me(object):
         assert isinstance(api, PixivApiBase)
         self.api = api
 
-    def following(self, page=None, per_page=100, publicity='public'):
+    def following_users(self, page=None, per_page=100, publicity='public'):
         url = 'https://public-api.secure.pixiv.net/v1/me/following.json'
         params = {
             'page': page,
