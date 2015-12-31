@@ -17,13 +17,13 @@ class PixivError(Exception):
     pass
 
 
-class Publicity(enum.Enum):
+class Publicity(str, enum.Enum):
     """画像やフォローユーザの公開/非公開"""
     PUBLIC = 'public'
     PRIVATE = 'private'
 
 
-class RankingType(enum.Enum):
+class RankingType(str, enum.Enum):
     """ランキングの検索対象"""
     ALL = 'all'
     ILLUST = 'illust'
@@ -31,7 +31,7 @@ class RankingType(enum.Enum):
     UGOIRA = 'ugoira'
 
 
-class RankingMode(enum.Enum):
+class RankingMode(str, enum.Enum):
     """ランキングのモード"""
     DAILY = 'daily'
     WEEKLY = 'weekly'
@@ -45,32 +45,6 @@ class RankingMode(enum.Enum):
     MALE_R18 = 'male_r18'
     FEMALE_R18 = 'female_r18'
     R18G = 'r18g'
-
-
-class WorkType(enum.Enum):
-    """投稿作品の種類"""
-    ILLUST = 'illust'
-    MANGA = 'manga'
-    UGOIRA = 'ugoira'
-    NOVEL = 'novel'
-
-
-def worktype(info_json):
-    """
-    投稿作品の種類を判定する
-    :param info_json: 作品情報
-    :return: WorkType
-    """
-    if 'text_length' in info_json:
-        return WorkType.NOVEL
-    if info_json.is_manga:
-        return WorkType.MANGA
-    try:
-        if 'ugoira600x600' in info_json.metadata.zip_urls:
-            return WorkType.UGOIRA
-    except AttributeError:
-        pass
-    return WorkType.ILLUST
 
 
 class PixivApiBase(object):
@@ -443,7 +417,7 @@ class PixivApi(PixivApiBase):
             params['date'] = date
         return self.request_multipages('get', url, params)
 
-    def search_works(self, query, page=None, per_page=100, mode='text',
+    def search_works(self, query, page=None, per_page=100, mode='tag',
                      period='all', order='desc', sort='date',
                      types=('illustration', 'manga', 'ugoira'),
                      image_sizes=('px_128x128', 'px_480mw', 'large'),

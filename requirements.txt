@@ -1,0 +1,4 @@
+attrdict>=2.0.0
+lxml>=3.5.0
+requests>=2.9.1
+scrapelib>=1.0.0

@@ -73,15 +73,12 @@ class Downloader(object):
         self._save_json(info, self.work_info_outpath(info, 'json'))
         self._save_json(tuple(self.api.work(info.id).comments()), self.work_comments_outpath(info, 'json'))
 
-        worktype = api.worktype(info)
-        if worktype == api.WorkType.ILLUST:
-            self._download_illust(info)
-        elif worktype == api.WorkType.MANGA:
-            self._download_manga(info)
-        elif worktype == api.WorkType.UGOIRA:
+        if info.type == 'ugoira':
             self._download_ugoira(info)
+        elif info.page_count == 1:
+            self._download_singlepage(info)
         else:
-            assert False
+            self._download_multipage(info)
 
     def download_novel(self, novel_id):
         info = self.api.novel(novel_id).info()
@@ -107,15 +104,15 @@ class Downloader(object):
         for m in re.finditer(r'\[pixivimage:(\d+)\]', novel_text):
             self.download_work(m.group(1))
 
-    def _download_illust(self, info):
+    def _download_singlepage(self, info):
         url = info.image_urls.large
-        out = self.illust_outpath(info, _ext(url))
+        out = self.siglepage_outpath(info, _ext(url))
         self._download_raw(url, out, info.reuploaded_time)
 
-    def _download_manga(self, info):
+    def _download_multipage(self, info):
         for i, page in enumerate(info.metadata.pages):
             url = page.image_urls.large
-            out = self.manga_outpath(info, i, _ext(url))
+            out = self.multipage_outpath(info, i, _ext(url))
             self._download_raw(url, out, info.reuploaded_time)
 
     def _download_ugoira(self, info):
@@ -148,11 +145,11 @@ class Downloader(object):
         self._download_raw(url, out)
 
     @staticmethod
-    def illust_outpath(work, ext):
+    def siglepage_outpath(work, ext):
         return 'users/{:09d}/works/{:012d}.{}'.format(work.user.id, work.id, ext)
 
     @staticmethod
-    def manga_outpath(work, page, ext):
+    def multipage_outpath(work, page, ext):
         return 'users/{:09d}/works/{:012d}_{:04d}.{}'.format(work.user.id, work.id, page, ext)
 
     @staticmethod
